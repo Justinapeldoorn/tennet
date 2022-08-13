@@ -1,0 +1,50 @@
+components:
+  schemas:
+    ProductionInstallationsDto:
+      required:
+        - name
+        - contact
+        - outputPower
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        contact:
+          $ref: '#/components/schemas/ContactDto'
+        outputPower:
+          $ref: '#/components/schemas/OutputPower'
+
+    ContactDto:
+      required:
+        - name
+        - zipCode
+        - city
+        - houseNumber
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        zipCode:
+          type: string
+          pattern: "^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$"
+        city:
+          type: string
+          minLength: 1
+          example: Arnhem
+        houseNumber:
+          type: string
+          minLength: 1
+          example: 12a
+
+    Name:
+      type: string
+      minLength: 5
+      maxLength: 50
+      example: My installation
+
+    OutputPower:
+      type: number
+      format: double
+      minimum: 0.0001
+      maximum: 999999
+      example: 0.123

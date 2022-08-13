@@ -1,0 +1,155 @@
+openapi: 3.0.3
+info:
+  title: Tennet API
+  description: The Tennet API
+  version: 1.0.0
+
+paths:
+  /productioninstallations:
+    post:
+      tags:
+        - ProductionInstallations
+      summary: persist a production installation
+      description: a description
+      operationId: saveProductionInstallation
+      requestBody:
+        description: The JSON for the production installation
+        content:
+          application/json:
+            schema:
+              $ref: './components.yml#/components/schemas/ProductionInstallationsDto'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yml#/components/schemas/ProductionInstallationsDto'
+    get:
+      tags:
+        - ProductionInstallations
+      summary: Find a PI by name
+      description: Find a PI by name
+      operationId: findPiByName
+      parameters:
+        - name: name
+          in: query
+          description: name of the PI
+          required: true
+          schema:
+            $ref: './components.yml#/components/schemas/Name'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yml#/components/schemas/ProductionInstallationsDto'
+
+  /productioninstallations/findAll:
+    get:
+      tags:
+        - ProductionInstallations
+      summary: Find all PI
+      description: Find all PI
+      operationId: findAllPi
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yml#/components/schemas/ProductionInstallationsDto'
+
+  /productioninstallations/findByOutputPowerRange:
+    get:
+      tags:
+        - ProductionInstallations
+      summary: Finds all PI's between a certain output power range.
+      description: Finds all PI's between a certain output power range.
+        Take notice, the minimum value and maximum value are both inclusive.
+      operationId: findByOutputPowerRange
+      parameters:
+        - name: minimumInclusive
+          in: query
+          description: minimum output power value, inclusive.
+          required: true
+          schema:
+            $ref: './components.yml#/components/schemas/OutputPower'
+        - name: maximumInclusive
+          in: query
+          description: maximum output power value, inclusive.
+          required: true
+          schema:
+            $ref: './components.yml#/components/schemas/OutputPower'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yml#/components/schemas/ProductionInstallationsDto'
+
+  /contacts:
+    post:
+      tags:
+        - Contact
+      summary: save a contact
+      description: Save a contact
+      operationId: saveContact
+      requestBody:
+        description: The JSON for the Contact
+        content:
+          application/json:
+            schema:
+              $ref: './components.yml#/components/schemas/ContactDto'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yml#/components/schemas/ContactDto'
+    get:
+      tags:
+        - Contact
+      summary: Find a contact by name
+      description: Find a contact by name
+      operationId: findContactByName
+      parameters:
+        - name: name
+          in: query
+          description: name of the contact
+          required: true
+          schema:
+            $ref: './components.yml#/components/schemas/Name'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: './components.yml#/components/schemas/ContactDto'
+
+  /contacts/findAll:
+    get:
+      tags:
+        - Contact
+      summary: Find all Contacts
+      description: Find all Contacts
+      operationId: findAllContacts
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './components.yml#/components/schemas/ContactDto'
